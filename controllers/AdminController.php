@@ -129,7 +129,32 @@ class AdminController extends Controller
 	
 	public function actionModifyPwd()
 	{
-		return $this->render('modifypwd');
+		if(Yii::$app->request->get('id'))
+		{
+			$id = Yii::$app->request->get('id');
+			$user = \app\models\User::findOne(['uid' =>$id]);
+			return $this->render('modifypwd',['user' => $user]);
+		}
+		else if(isset($_REQUEST) && count($_REQUEST) > 0)
+		{
+			if($_REQUEST['txtId'])
+			{
+				$user = \app\models\User::findOne(['uid' => $_REQUEST['txtId']]);
+			}
+			else
+			{
+				$user = new \app\models\User();
+			}
+			$user->password = md5($_REQUEST['txtPwd']);
+			
+			if($_REQUEST['txtId'])
+				$user->update();
+			else
+				$user->save();
+				
+			return $this->redirect(Yii::$app->urlManager->createUrl(['admin/modify-pwd/'.$user->uid]));
+		}
+		return $this->render('users');
 	}
 	
 	public function actionTypes()
@@ -191,7 +216,32 @@ class AdminController extends Controller
 	
 	public function actionUsers()
 	{
-		return $this->render('users');
+		if(array_key_exists('txtName',$_REQUEST))
+		{
+			if($_REQUEST['txtPwd'] && $_REQUEST['txtPwd'] === $_REQUEST['txtRePwd'])
+			{
+				$user = new \app\models\User();
+				$user->username = $_REQUEST['txtName'];
+				$user->password = md5($_REQUEST['txtPwd']);				
+				$user->save();
+			}
+			return $this->redirect(Yii::$app->urlManager->createUrl(['admin/users']));
+		}
+		
+		$query = \app\models\User::find();
+		$pagination = new Pagination([
+			'defaultPageSize' => 10,
+			'totalCount' => $query->count(),
+		]);
+		
+		$types = $query->offset($pagination->offset)
+					->limit($pagination->limit)
+					->all();
+		
+		return $this->render('users',[
+			'users' => $types,
+			'pagination' => $pagination,
+		]);
 	}
 }
 ?>

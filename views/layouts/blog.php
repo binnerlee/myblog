@@ -29,7 +29,7 @@ AppAsset::addCSSForHead($this,'@web/css/dashboard.css');
 <?php
 NavBar::begin([
 	'brandLabel' => 'Binner',
-	'brandUrl' => Yii::$app->homeUrl,
+	'brandUrl' => Yii::$app->urlManager->createUrl(['blog/index']),
 	'options' => [
 		'class' => 'navbar-inverse navbar-fixed-top',
 	],

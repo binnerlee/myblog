@@ -45,6 +45,7 @@ $config = [
 				'admin/art/<id:\d{1,}>' => 'admin/art',
 				'admin/edit-type/<id:\d{1,}>' => 'admin/edit-type',
 				'blog/detail/<id:\d{1,}>' => 'blog/detail',
+				'admin/modify-pwd/<id:\d{1,}>' => 'admin/modify-pwd',
 			]
         ]
     ],
