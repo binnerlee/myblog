@@ -75,7 +75,6 @@ class AdminController extends Controller
 			else
 			{
 				$newart = new \app\models\Blog;
-				$newart->excerpt = '1';
 				$newart->alias = '';
 				$newart->author = 0;
 				$newart->sortid= $_REQUEST['ddlType'];
@@ -92,9 +91,10 @@ class AdminController extends Controller
 				$newart->template='';
 			}
 			
-			$newart->title = $_REQUEST['txtTitle'];
+			$newart->title = addslashes(trim($_REQUEST['txtTitle']));
 			$newart->date = time();
-			$newart->content = $_REQUEST['txtContent'];
+			$newart->content = addslashes(trim($_REQUEST['txtContent']));
+			$newart->excerpt = addslashes(trim($_REQUEST['txtExcerpt']));
 			
 			if($_REQUEST['txtId'])
 				$newart->update();
@@ -112,12 +112,12 @@ class AdminController extends Controller
 	{
 		if(!array_key_exists('ids',$_POST) || !$_POST['ids'])
 		{
-			echo 'Fail|未选择文章';
+			echo 'Fail|鏈�夋嫨鏂囩珷';
 			return;
 		}
 		if(!array_key_exists('typeid',$_POST) || !$_POST['typeid'])
 		{
-			echo 'Fail|未选择类型';
+			echo 'Fail|鏈�夋嫨绫诲瀷';
 			return;
 		}
 		

@@ -9,11 +9,15 @@
 	$gid = '';
 	$title = '';
 	$content = '';
+	$excerpt = '';
+	$sort = '';
 	if(isset($art))
 	{
 		$gid = $art->gid;
 		$title = $art->title;
 		$content = $art->content;
+		$excerpt = $art->excerpt;
+		$sort = $art->sortid;
 	}
 ?>
 
@@ -28,10 +32,14 @@
 		<textarea id="txtContent" name="txtContent" class="form-control" style="height:250px;"><?=$content?></textarea>
 	</div>
 	<div class="col-xs-12 col-sm-12 placeholder">
+		<label for="txtExcerpt">文章摘要</label>
+		<textarea id="txtExcerpt" name="txtExcerpt" class="form-control" style="height:100px;"><?=$excerpt?></textarea>
+	</div>
+	<div class="col-xs-12 col-sm-12 placeholder">
 		<select class="form-control" id="ddlType">
 			<option value="">选择分类...</option>
 			<?php foreach($types as $t): ?>
-			<option value="<?=$t->sid ?>>"><?=$t->sortname?></option>
+			<option value="<?=$t->sid ?>>"<?= $t->sid == $sort ? ' selected' : '' ?>><?=$t->sortname?></option>
 			<?php endforeach; ?>
 		</select>
 	</div>
@@ -44,6 +52,7 @@
 
 <?php $this->beginBlock('test') ?>
 loadEditor('txtContent');
+loadEditor('txtExcerpt');
 setTimeout("autosave(0)",60000);
 <?php $this->endBlock(); ?>
 <?php
