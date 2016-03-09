@@ -16,7 +16,7 @@ Thumbs.db
 /vendor
 
 # 运行时目录
-/runtime/debug
+/runtime
 
 .bowerrc
 
