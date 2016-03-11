@@ -78,7 +78,6 @@ class AdminController extends Controller
 				$newart->excerpt = '1';
 				$newart->alias = '';
 				$newart->author = 0;
-				$newart->sortid= $_REQUEST['ddlType'];
 				$newart->type='blog';
 				$newart->views='0';
 				$newart->comnum='0';
@@ -95,11 +94,14 @@ class AdminController extends Controller
 			$newart->title = $_REQUEST['txtTitle'];
 			$newart->date = time();
 			$newart->content = $_REQUEST['txtContent'];
+			$newart->excerpt = $_REQUEST['txtExcerpt'];
+			$newart->sortid = $_REQUEST['ddlType'];
 			
 			if($_REQUEST['txtId'])
 				$newart->update();
 			else
 				$newart->save();
+			
 			return $this->redirect(Yii::$app->urlManager->createUrl(['admin/articles']));
 		}
 	
@@ -112,12 +114,12 @@ class AdminController extends Controller
 	{
 		if(!array_key_exists('ids',$_POST) || !$_POST['ids'])
 		{
-			echo 'Fail|未选择文章';
+			echo 'Fail|鏈�夋嫨鏂囩珷';
 			return;
 		}
 		if(!array_key_exists('typeid',$_POST) || !$_POST['typeid'])
 		{
-			echo 'Fail|未选择类型';
+			echo 'Fail|鏈�夋嫨绫诲瀷';
 			return;
 		}
 		
