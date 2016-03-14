@@ -44,6 +44,14 @@
 			<?php endforeach; ?>
 		</select>
 	</div>
+	<!--
+	<div class="col-xs-10 col-sm-10 placeholder">
+		<input type="text" id="txtTags" name="txtTags" class="form-control" placeholder="文章标签，逗号或空格分隔，过多的标签会影响系统运行效率"/>
+	</div>
+	<div class="col-xs-2 col-sm-2 placeholder">
+		<a href="javascript:;">已有标签+</a>
+	</div>
+	-->
 	<div class="col-xs-12 col-sm-12 placeholder">
 		<button type="submit" class="btn btn-info">发布文章</button>
 		<button type="button" class="btn btn-info">保存草稿</button>

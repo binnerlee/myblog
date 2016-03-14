@@ -12,6 +12,7 @@
 		  <th>查看</th>
 		  <th>作者</th>
 		  <th>分类</th>
+		  <th>阅读</th>
 		  <th>时间</th>
 		</tr>
 	  </thead>
@@ -23,6 +24,7 @@
 		  <td><a href="<?=Yii::$app->urlManager->createUrl(['admin/art/'.$art['gid']]) ?>">查看</a></td>
 		  <td><a href="#">admin</a></td>
 		  <td><?=$art['sortname']?></td>
+		  <td><?=$art['attnum']?></td>
 		  <td><?= date("Y-m-d h:i:s",$art['date']) ?></td>
 		</tr>
 		<?php endforeach; ?>

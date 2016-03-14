@@ -31,7 +31,7 @@ class AdminController extends Controller
 		
 		$query = new \yii\db\Query;
 		
-		$result = $query->select(['t0.gid','t0.title','t0.author','t0.sortid','t0.date','t1.sortname'])->from('binner_blog t0')->leftJoin('binner_sort t1','t0.sortid = t1.sid');
+		$result = $query->select(['t0.gid','t0.title','t0.author','t0.sortid','t0.date','t0.attnum','t1.sortname'])->from('binner_blog t0')->leftJoin('binner_sort t1','t0.sortid = t1.sid');
 		
 		
 		$pagination = new Pagination([
@@ -39,7 +39,7 @@ class AdminController extends Controller
 			'totalCount' => $result->count(),
 		]);
 		
-		$arts = $result->orderBy('t0.date')
+		$arts = $result->orderBy('t0.date desc')
 		->offset($pagination->offset)
 		->limit($pagination->limit)
 		->all();
@@ -156,7 +156,8 @@ class AdminController extends Controller
 				
 			return $this->redirect(Yii::$app->urlManager->createUrl(['admin/modify-pwd/'.$user->uid]));
 		}
-		return $this->render('users');
+		
+		return $this->render('modifypwd',['user' => Yii::$app->user->identity]);
 	}
 	
 	public function actionTypes()
