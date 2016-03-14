@@ -10,14 +10,14 @@
 	$title = '';
 	$content = '';
 	$excerpt = '';
-	$sort = '';
+	$sortid = '';
 	if(isset($art))
 	{
 		$gid = $art->gid;
 		$title = $art->title;
 		$content = $art->content;
 		$excerpt = $art->excerpt;
-		$sort = $art->sortid;
+		$sortid = $art->sortid;
 	}
 ?>
 
@@ -31,18 +31,27 @@
 	<div class="col-xs-12 col-sm-12 placeholder">
 		<textarea id="txtContent" name="txtContent" class="form-control" style="height:250px;"><?=$content?></textarea>
 	</div>
+	
 	<div class="col-xs-12 col-sm-12 placeholder">
-		<label for="txtExcerpt">文章摘要</label>
+		<label for="txtExcerpt" style="float:left;">摘要：</label>
 		<textarea id="txtExcerpt" name="txtExcerpt" class="form-control" style="height:100px;"><?=$excerpt?></textarea>
 	</div>
 	<div class="col-xs-12 col-sm-12 placeholder">
-		<select class="form-control" id="ddlType">
-			<option value="">选择分类...</option>
+		<select class="form-control" id="ddlType" name="ddlType">
+			<option value="-1">选择分类...</option>
 			<?php foreach($types as $t): ?>
-			<option value="<?=$t->sid ?>>"<?= $t->sid == $sort ? ' selected' : '' ?>><?=$t->sortname?></option>
+			<option value="<?=$t->sid ?>"<?=$t->sid == $sortid ? 'selected' : '' ?>><?=$t->sortname?></option>
 			<?php endforeach; ?>
 		</select>
 	</div>
+	<!--
+	<div class="col-xs-10 col-sm-10 placeholder">
+		<input type="text" id="txtTags" name="txtTags" class="form-control" placeholder="文章标签，逗号或空格分隔，过多的标签会影响系统运行效率"/>
+	</div>
+	<div class="col-xs-2 col-sm-2 placeholder">
+		<a href="javascript:;">已有标签+</a>
+	</div>
+	-->
 	<div class="col-xs-12 col-sm-12 placeholder">
 		<button type="submit" class="btn btn-info">发布文章</button>
 		<button type="button" class="btn btn-info">保存草稿</button>

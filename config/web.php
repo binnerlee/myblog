@@ -50,6 +50,7 @@ $config = [
         ]
     ],
     'params' => $params,
+	'defaultRoute' => 'blog',
 ];
 
 if (YII_ENV_DEV) {
