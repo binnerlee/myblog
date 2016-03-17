@@ -12,7 +12,10 @@ class BlogController extends Controller
 	public function actionIndex()
 	{
 		$query = new \yii\db\Query;
-		$result = $query->select(['t0.gid','t0.title','t0.author','t0.sortid','t0.date','t0.excerpt','t0.attnum','t1.sortname'])->from('binner_blog t0')->leftJoin('binner_sort t1','t0.sortid = t1.sid');
+		$result = $query->select(['t0.gid','t0.title','t2.username','t0.sortid','t0.date','t0.excerpt','t0.attnum','t1.sortname'])
+		->from('binner_blog t0')
+		->leftJoin('binner_sort t1','t0.sortid = t1.sid')
+		->leftJoin('binner_user t2','t0.author = t2.uid');
 	
 		if(array_key_exists('t',$_GET) && isset($_GET['t']))
 		{
@@ -41,7 +44,11 @@ class BlogController extends Controller
 		{
 			$id = Yii::$app->request->get('id');
 			$query = new \yii\db\Query;
-			$result = $query->select(['t0.gid','t0.title','t0.content','t0.author','t0.sortid','t0.attnum','t0.date','t1.sortname'])->from('binner_blog t0')->leftJoin('binner_sort t1','t0.sortid = t1.sid')->where(['t0.gid' => $id])->one();
+			$result = $query->select(['t0.gid','t0.title','t0.content','t2.username','t0.sortid','t0.attnum','t0.date','t1.sortname'])
+			->from('binner_blog t0')
+			->leftJoin('binner_sort t1','t0.sortid = t1.sid')
+			->leftJoin('binner_user t2','t0.author = t2.uid')
+			->where(['t0.gid' => $id])->one();
 			
 			$an = (int)$result['attnum'];
 			$an = $an + 1;

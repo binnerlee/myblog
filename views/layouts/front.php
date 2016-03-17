@@ -80,7 +80,7 @@ AppAsset::addCSSForHead($this,'@web/css/blog.css');
     <footer class="blog-footer">
       <p>This is Binner's blog.</p>
       <p>
-        <a href="main.html">Back to top</a>
+        <a href="#">Back to top</a>
       </p>
     </footer>
 	<?php $this->endBody() ?>

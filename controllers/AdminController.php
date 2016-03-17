@@ -14,7 +14,7 @@ class AdminController extends Controller
 	{
 		if(Yii::$app->user->isGuest)
 		{
-			$this->redirect(Yii::$app->urlManager->createUrl(['site/login']));
+			$this->redirect(Yii::$app->urlManager->createUrl(['/login'.'?u='.Yii::$app->request->pathInfo ]));
 		}
 		
 		return parent::beforeAction($action);
@@ -92,8 +92,8 @@ class AdminController extends Controller
 			
 			$newart->title = addslashes(trim($_REQUEST['txtTitle']));
 			$newart->date = time();
-			$newart->content = addslashes(trim($_REQUEST['txtContent']));
-			$newart->excerpt = addslashes(trim($_REQUEST['txtExcerpt']));
+			$newart->content = trim($_REQUEST['txtContent']);
+			$newart->excerpt = trim($_REQUEST['txtExcerpt']);
 			$newart->sortid = $_REQUEST['ddlType'];
 			
 			if($_REQUEST['txtId'])

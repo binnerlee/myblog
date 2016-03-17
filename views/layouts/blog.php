@@ -44,7 +44,7 @@ echo Nav::widget([
 		],
 		['label' => '设置', 'url' => ['/admin/index']],
 		Yii::$app->user->isGuest ?
-		['label' => '登录', 'url' => ['/site/login']] :
+		['label' => '登录', 'url' => ['/login']] :
 		[
 			'label' => '登出 (' . Yii::$app->user->identity->username . ')',
 			'url' => ['/site/logout'],

@@ -11,7 +11,7 @@
 		<?php endif; ?>
 		<h2 class="blog-item-title"><a href="<?=Yii::$app->urlManager->createUrl(['blog/detail/'.$t['gid']])?>"><?=$t['title']?></a></h2>
 		<p class="blog-item-meta">
-			<a href="#">Binner</a>发表于<?=date('Y:m:d h:i:s',$t['date'])?>
+			<?=$t['username']?>发表于<?=date('Y:m:d h:i:s',$t['date'])?>
 		</p>
 		<p>
 		<?=$t['excerpt']?>
