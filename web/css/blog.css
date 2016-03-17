@@ -45,8 +45,8 @@ a:hover{
 
 .blog-masthead {
   background-color: #fff;
-  -webkit-box-shadow: inset 0 -2px 5px rgba(0,0,0,.1);
-          box-shadow: inset 0 -2px 5px rgba(0,0,0,.1);
+  /* -webkit-box-shadow: inset 0 -2px 5px rgba(0,0,0,.1); */
+  /* box-shadow: inset 0 -2px 5px rgba(0,0,0,.1); */
 }
 
 /* Nav links */
