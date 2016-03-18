@@ -245,5 +245,10 @@ class AdminController extends Controller
 			'pagination' => $pagination,
 		]);
 	}
+	
+	public function actionSetting()
+	{
+		return $this->render('setting');
+	}
 }
 ?>

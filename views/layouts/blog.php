@@ -42,7 +42,7 @@ echo Nav::widget([
 			'label' => Yii::$app->user->identity->username,
 			'url' => ['/admin/modify-pwd']
 		],
-		['label' => '设置', 'url' => ['/admin/index']],
+		['label' => '设置', 'url' => ['/admin/setting']],
 		Yii::$app->user->isGuest ?
 		['label' => '登录', 'url' => ['/login']] :
 		[
@@ -80,9 +80,7 @@ NavBar::end();
 			<li><a href="">模板</a></li>
 		  </ul>
 		</div>
-		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-			<?=$content ?>
-		</div>
+		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"><?=$content ?></div>
 	</div>
 </div>
 <?php $this->endBody() ?>
