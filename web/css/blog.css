@@ -145,9 +145,12 @@ a:hover{
   margin: 10px 0;
   font-size:14px;
   color: #999;
+  position:relative;
+  height:20px;
 }
 .blog-item-footer{
-	text-align:right;
+	position:absolute;
+	right:0;
 }
 
 /*

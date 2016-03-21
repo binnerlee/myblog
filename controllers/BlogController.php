@@ -12,16 +12,18 @@ class BlogController extends Controller
 	public function actionIndex()
 	{
 		$query = new \yii\db\Query;
-		$result = $query->select(['t0.gid','t0.title','t2.username','t0.sortid','t0.date','t0.excerpt','t0.attnum','t1.sortname'])
+		$result = $query->select(['t0.gid','t0.title','t2.username','t0.sortid','t0.date','t0.excerpt','t0.attnum','t1.sortname','GROUP_CONCAT(t3.tagname) tags'])
 		->from('binner_blog t0')
 		->leftJoin('binner_sort t1','t0.sortid = t1.sid')
-		->leftJoin('binner_user t2','t0.author = t2.uid');
+		->leftJoin('binner_user t2','t0.author = t2.uid')
+		->leftJoin('binner_tag t3',' find_in_set(t0.gid,t3.gid)');
 	
 		if(array_key_exists('t',$_GET) && isset($_GET['t']))
 		{
 			$result = $result->where(['t0.sortid' => $_GET['t']]);
 		}
 		
+		$result->groupby('t0.gid');
 		$pagination = new Pagination([
 			'defaultPageSize' => 10,
 			'totalCount' => $result->count(),

@@ -6,6 +6,8 @@
 	AppAsset::addScriptForHead($this,'@web/editor/kindeditor.js?v=1.0');
 	AppAsset::addScriptForHead($this,'@web/editor/lang/zh_CN.js?v=1.0');
 	
+	$this->title = '新文章';
+	
 	$gid = '';
 	$title = '';
 	$content = '';
@@ -44,14 +46,19 @@
 			<?php endforeach; ?>
 		</select>
 	</div>
-	<!--
 	<div class="col-xs-10 col-sm-10 placeholder">
-		<input type="text" id="txtTags" name="txtTags" class="form-control" placeholder="文章标签，逗号或空格分隔，过多的标签会影响系统运行效率"/>
+		<input type="text" id="txtTags" name="txtTags" class="form-control" value="<?=$currentTags?>" placeholder="文章标签，逗号或空格分隔，过多的标签会影响系统运行效率"/>
 	</div>
 	<div class="col-xs-2 col-sm-2 placeholder">
-		<a href="javascript:;">已有标签+</a>
+		<a href="javascript:;" id="formToggle">已有标签+</a>
+		<div id="formDiv" style="display:none;">
+			<ul>
+			<?php foreach($tags as $t): ?>
+				<li><?=$t->tagname?></li>
+			<?php endforeach; ?>
+			</ul>
+		</div>
 	</div>
-	-->
 	<div class="col-xs-12 col-sm-12 placeholder">
 		<button type="submit" class="btn btn-info">发布文章</button>
 		<button type="button" class="btn btn-info">保存草稿</button>
@@ -60,9 +67,18 @@
 </div>
 
 <?php $this->beginBlock('test') ?>
-loadEditor('txtContent');
-loadEditor('txtExcerpt');
-setTimeout("autosave(0)",60000);
+$(document).ready(function(){
+	loadEditor('txtContent');
+	loadEditor('txtExcerpt');
+	setTimeout("autosave(0)",60000);
+	
+	$('#formToggle').click(function(){
+		if($('#formDiv').css('display') === 'block')
+			$('#formDiv').hide();
+		else
+			$('#formDiv').show();
+	});
+});
 <?php $this->endBlock(); ?>
 <?php
 	$this->registerJs($this->blocks['test'],yii\web\View::POS_END);

@@ -61,9 +61,15 @@ class AdminController extends Controller
 			
 			$id = Yii::$app->request->get('id');
 			$art = Blog::findOne(['gid' =>$id]);
+			$tags = \app\models\Tag::find()->all();
+			
+			$currentTags = \app\models\Tag::getTagByGid($id);
+			
 			return $this->render('art',[
 			'art' => $art,
 			'types' => $types,
+			'tags' => $tags,
+			'currentTags' => implode(',',$currentTags),
 			]);
 		}
 		else if(isset($_REQUEST) && count($_REQUEST) > 0)
@@ -88,10 +94,10 @@ class AdminController extends Controller
 				$newart->allow_remark='y';
 				$newart->password='';
 				$newart->template='';
+				$newart->date = time();
 			}
 			
 			$newart->title = addslashes(trim($_REQUEST['txtTitle']));
-			$newart->date = time();
 			$newart->content = trim($_REQUEST['txtContent']);
 			$newart->excerpt = trim($_REQUEST['txtExcerpt']);
 			$newart->sortid = $_REQUEST['ddlType'];
@@ -101,11 +107,12 @@ class AdminController extends Controller
 			else
 				$newart->save();
 			
+			$tagstr = $_REQUEST['txtTags'];
+			\app\models\Tag::updateTag($tagstr,$newart->gid);
 			return $this->redirect(Yii::$app->urlManager->createUrl(['admin/articles']));
 		}
 	
 		$types = \app\models\Sort::find()->all();
-		
 		return $this->render('art',['types' => $types,]);
 	}
 	

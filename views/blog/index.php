@@ -16,9 +16,22 @@
 		<p>
 		<?=$t['excerpt']?>
 		</p>
-		<p class="blog-item-meta blog-item-footer">
+		<div class="blog-item-meta">
+		<span>
+			标签：
+		</span>
+		<?php 
+			$tags = !empty($t["tags"]) ? preg_split('/[,]/',$t["tags"]):array();
+			foreach($tags as $tag):
+		?>
+		<span>
+			<?=$tag?>
+		</span>
+		<?php endforeach;?>
+		<span class="blog-item-footer">
 			阅读(<?=$t['attnum']?>)
-		</p>
+		</span>
+		</div>
 	</div>
 	<?php endforeach; ?>
 </div>
